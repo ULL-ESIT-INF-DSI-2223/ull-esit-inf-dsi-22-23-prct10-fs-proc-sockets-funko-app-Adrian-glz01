@@ -8,6 +8,8 @@
     "ejer1": "tsc-watch --onSuccess \"node dist/Ejercicio1-debug/readfile.js\"",
     "ejer2p": "tsc-watch --onSuccess \"node dist/Ejercicio2-readFileContent/withPipeStream/index.js\"",
     "ejer2wp": "tsc-watch --onSuccess \"node dist/Ejercicio2-readFileContent/withOutPipeStream/index.js\"",
+    "pe102client": "tsc-watch --onSuccess \"node dist/EjercicioPE102/client.js\"",
+    "pe102server": "tsc-watch --onSuccess \"node dist/EjercicioPE102/server.js\"",
     "start": "tsc-watch --onSuccess \"node dist/Funko/funko-app.js\"",
     "doc": "typedoc",
     "coverage": "nyc npm test && nyc report --reporter=lcov",
