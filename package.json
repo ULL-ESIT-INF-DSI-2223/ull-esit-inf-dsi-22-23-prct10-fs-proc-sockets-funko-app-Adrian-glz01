@@ -1,0 +1,57 @@
+{
+  "name": "pr10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "ejer1": "tsc-watch --onSuccess \"node dist/Ejercicio1-debug/readfile.js\"",
+    "ejer2p": "tsc-watch --onSuccess \"node dist/Ejercicio2-readFileContent/withPipeStream/index.js\"",
+    "ejer2wp": "tsc-watch --onSuccess \"node dist/Ejercicio2-readFileContent/withOutPipeStream/index.js\"",
+    "start": "tsc-watch --onSuccess \"node dist/Funko/funko-app.js\"",
+    "doc": "typedoc",
+    "coverage": "nyc npm test && nyc report --reporter=lcov",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct10-fs-proc-sockets-funko-app-Adrian-glz01.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct10-fs-proc-sockets-funko-app-Adrian-glz01.git"
+  },
+  "homepage": "https://github.com/ULL-ESIT-INF-DSI-2223/ull-esit-inf-dsi-22-23-prct10-fs-proc-sockets-funko-app-Adrian-glz01.git",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/inquirer": "^9.0.3",
+    "@types/lowdb": "^1.0.11",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.15.11",
+    "@types/prompt-sync": "^4.2.0",
+    "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "c8": "^7.13.0",
+    "chai": "^4.3.7",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.8.4",
+    "prompt-sync": "^4.2.0",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^6.0.0",
+    "typedoc": "^0.23.27",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^7.3.3",
+    "lowdb": "^1.0.0",
+    "yargs": "^17.7.1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "entryPoints": [
+    "./src/Ejercicio2-readFileContent/withOutPipeStream/utilities.ts",
+    
+  ], 
+  "out": "./docs"
+}
