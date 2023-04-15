@@ -10,7 +10,9 @@
     "ejer2wp": "tsc-watch --onSuccess \"node dist/Ejercicio2-readFileContent/withOutPipeStream/index.js\"",
     "pe102client": "tsc-watch --onSuccess \"node dist/EjercicioPE102/client.js\"",
     "pe102server": "tsc-watch --onSuccess \"node dist/EjercicioPE102/server.js\"",
-    "start": "tsc-watch --onSuccess \"node dist/Funko/funko-app.js\"",
+    "funkoServer": "tsc-watch --onSuccess \"node dist/Ejercicio3-Funko-app-async/server.js\"",
+    "funkoClient": "tsc-watch --onSuccess \"node dist/Ejercicio3-Funko-app-async/client.js\"",
+    "start": "tsc-watch --onSuccess \"node dist/testing.js\"",
     "doc": "typedoc",
     "coverage": "nyc npm test && nyc report --reporter=lcov",
     "test": "mocha"

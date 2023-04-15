@@ -1,8 +1,14 @@
-import * as fs from 'fs';
 import * as chalk from 'chalk';
-import * as readline from 'readline';
+import {spawn} from 'child_process';
 
-export function run(path: string, lines: boolean, words: boolean, chars:boolean): void {
+/**
+ * @description Función que ejecuta el comando wc para contar líneas, palabras o caracteres de un fichero
+ * @param file 
+ * @param lines 
+ * @param words 
+ * @param chars 
+ */
+export function run(file: string, lines: boolean, words: boolean, chars:boolean): void {
   // Al menos debe existir una de las opciones que se pasan por parámetro
   // Controlamos que almenos un valor es true, por ende, si todas son false, emitimos mensaje de error y cerramos
   if (!lines && !words && !chars) {
@@ -10,49 +16,21 @@ export function run(path: string, lines: boolean, words: boolean, chars:boolean)
     process.exit(0);
   }
 
-  // creamos el stream de lectura del archivo
+  const wc = spawn('wc', [file]);
+  let wcOutput = '';
+  wc.stdout.on('data', (piece) => wcOutput += piece);
 
-  const inputFileTextStream = fs.createReadStream(path);
-  // MAnejo de errores siguiendo una programación defensiva
-  inputFileTextStream.on('error', (err) => {
-    console.log(chalk.red('Error leyendo el fichero: ${path}' + err.message));
-    process.exit(0);
-  });
-
-  // lectura de las lineas del fichero
-  const lineRead = readline.createInterface(inputFileTextStream);
-  // Manejo de errores siguiendo una programación defensiva
-  lineRead.on('error', (err) => {
-    console.log(chalk.red('Error leyendo el fichero: ${path} ' + err.message));
-    process.exit(0);
-  });
-
-  let linesNumber = 0;
-  let wordsNumber = 0;
-  let charsNumber = 0;
-
-  lineRead.on('line', (line:string) => { 
-    linesNumber++; // increamentamos el numero de lineas
-    if (words) {
-      wordsNumber += line.split(' ').length; // incrementamos el numero de palabras atendiendo a cada palabra separada por un espacio
-    }
-    if (chars) {
-      charsNumber += line.length; // incrementamos el numero de caracteres atendiendo a cada caracter de la linea
-    }
-  });
-
-  lineRead.on('close', () => {
-    // inputFileTextStream.close();
-
-    //* mostramos los resultados
+  wc.on('close', () => {
+    const wcOutputAsArray = wcOutput.split(/\s+/);
     if (lines) {
-      console.log(chalk.green('Número de líneas: ') + linesNumber);
-    }
+      const numberOfLines = +wcOutputAsArray[1] + 1 ;
+      console.log(`File ${file} has ` + numberOfLines + ` lines`);
+    } 
     if (words) {
-      console.log(chalk.green('Número de palabras: ') + wordsNumber);
-    }
+      console.log(`File ${file} has ${wcOutputAsArray[2]} words`);
+    } 
     if (chars) {
-      console.log(chalk.green('Número de caracteres: ') + charsNumber);
+      console.log(`File ${file} has ${wcOutputAsArray[3]} characters`);
     }
   });
 }

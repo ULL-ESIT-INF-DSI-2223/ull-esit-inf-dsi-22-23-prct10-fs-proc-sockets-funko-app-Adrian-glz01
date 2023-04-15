@@ -1,9 +1,16 @@
 {
   "entryPoints": [
-    "./src/Ejercicio2-readFileContent/withOutPipeStream/utilities.ts",
     "./src/EjercicioPE102/client.ts",
     "./src/EjercicioPE102/server.ts",
     "./src/EjercicioPE102/command.ts",
+    "./src/Ejercicio2-readFileContent/withOutPipeStream/utilities.ts",
+    "./src/Ejercicio2-readFileContent/withPipeStream/utilities.ts",
+    "./src/Ejercicio2-readFileContent/withPipeStream/functionality.ts",
+    "./src/Ejercicio2-readFileContent/withOutPipeStream/functionality.ts",
+    "./src/Ejercicio3-Funko-app-async/funkoInterface.ts",
+    "./src/Ejercicio3-Funko-app-async/types.ts",
+    "./src/Ejercicio3-Funko-app-async/utilities.ts",
+    "./src/Ejercicio3-Funko-app-async/utilities2.ts"
   ], 
   "out": "./docs"
 }

@@ -1,54 +1,34 @@
-import * as fs from 'fs';
 import * as chalk from 'chalk';
 import { spawn } from 'child_process';
-// import { StringDecoder } from 'string_decoder';
-import { pipeline } from 'stream';
 
-
-export function run(path: string, lines: boolean, words: boolean, chars:boolean): void {
-  const args = [];
-  if (lines) {
-    args.push('-l');
-  } else if (words) {
-    args.push('-w');
-  } else if (chars) {
-    args.push('-m');
+/**
+ * @description Ejecuta el comando wc con las opciones que se pasan por parámetro haciendo uso del método pipe
+ * @param file 
+ * @param lines 
+ * @param words 
+ * @param chars 
+ */
+export function run(file: string, lines: boolean, words: boolean, chars:boolean): void {
+  // Al menos debe existir una de las opciones que se pasan por parámetro
+  // Controlamos que almenos un valor es true, por ende, si todas son false, emitimos mensaje de error y cerramos
+  if (!lines && !words && !chars) {
+    console.log(chalk.red('Error: Al menos debe existir una de las opciones que se pasan por parámetro'));
+    process.exit(0);
   }
 
-  const wc = spawn('wc', args);
+  const stdoutArr: string[] = [];
 
-  const text_from_file = fs.createReadStream(path);
-  console.log(text_from_file)
-  //const utf8 = new StringDecoder('utf8');
+  if (lines) {
+    stdoutArr.push('-l');
+  } 
+  if (words) {
+    stdoutArr.push('-w');
+  }
+  if (chars) {
+    stdoutArr.push('-m');
+  }
+  stdoutArr.push(file);
 
-  // creamos el pipe
-
-  pipeline(
-    text_from_file,
-    wc.stdin,
-    (err) => {
-      if (err) {
-        console.log(chalk.red.bold('Error encontrado en el pipeline!!!', err));
-        process.exit(0);
-      } else {
-        wc.stdout.on('data', (data) => {
-        console.log(data.toString());
-        // console.log("entra aqui")
-        // const counter_lines = data.toString().trim().split(/\s+/);
-        if (lines) {
-          const lines = data.toString().split('\n').length;
-          console.log(chalk.green.bold('Lines: ', lines));
-        }
-        if (words) {
-          const words = data.toString().split(/\s+/).length;
-          console.log(chalk.green.bold('Words: ', words));
-        }
-        if (chars) {
-          const chars = data.toString().length;
-          console.log(chalk.green.bold('Chars: ', chars));
-        }
-        });
-      }
-    }
-  );
+  const wc = spawn('wc', stdoutArr);
+  wc.stdout.pipe(process.stdout);
 }
